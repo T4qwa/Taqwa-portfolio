@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taqwa Naseeb — Portfolio</title>
+  <meta name="description" content="Accounting and Finance student at Bayes Business School. Interactive portfolio featuring credit risk analysis, NLP, and AI." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <!-- ==================== HERO ==================== -->
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Portfolio · 2025 / 26</p>
+      <h1 class="hero-name">
+        <span class="name-first">Taqwa</span>
+        <span class="name-last">Naseeb</span>
+      </h1>
+      <p class="hero-sub">
+        Aspiring Accounting &amp; Finance student — Bayes Business School
+      </p>
+      <div class="hero-tags">
+        <span>💰 Finance</span>
+        <span>🕷️ Scraping</span>
+        <span>👾 AI</span>
+        <span>🌿 Lifestyle</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== TABS ==================== -->
+  <nav class="tabs" role="tablist" aria-label="Portfolio sections">
+    <button class="tab active" role="tab" aria-selected="true" data-tab="about">About Me</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="projects">Passion Projects</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="interests">Personal Interests</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="intelligence">Market Intelligence</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="ai">AI Analyst</button>
+  </nav>
+
+  <main>
+
+    <!-- ==================== TAB 1: ABOUT ==================== -->
+    <section class="panel active" id="about" role="tabpanel">
+      <h2 class="panel-title">Aspiring Accounting &amp; Finance Student</h2>
+
+      <div class="about-grid">
+
+        <div class="card">
+          <h3>Summary</h3>
+          <p>Passionate accounting and finance student currently balancing studies with part-time work. Skilled in applying problem-solving and analytical thinking to academic projects as well as real-world financial tasks.</p>
+        </div>
+
+        <div class="card">
+          <h3>Education</h3>
+          <ul class="timeline">
+            <li>
+              <strong>BSc Accounting &amp; Finance</strong>
+              <span class="muted">Bayes Business School · 2025 – Present</span>
+              <p class="small">Relevant modules: Introduction to Data Science and AI Tools, Financial Accounting.</p>
+            </li>
+            <li>
+              <strong>A-Levels</strong>
+              <span class="muted">Westfield Academy · 2023 – 2025</span>
+              <p class="small">Psychology (B), Politics (B), Biology (C)</p>
+            </li>
+            <li>
+              <strong>GCSEs</strong>
+              <span class="muted">Westfield Academy · 2017 – 2022</span>
+              <p class="small">Maths (7), Combined Science (7), English Language (7), English Literature (6), History (8)</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Employment</h3>
+          <ul class="timeline">
+            <li>
+              <strong>Sales Advisor — The Perfume Shop</strong>
+              <span class="muted">July 2025 – Present</span>
+              <p class="small">Developed strong communication skills through daily customer interaction and collaborative teamwork.</p>
+            </li>
+            <li>
+              <strong>Carer — Private Care Home</strong>
+              <span class="muted">June 2022 – June 2024</span>
+              <p class="small">Gained communication and teamwork skills; paid close attention to detail when carrying out medical tasks such as organising medications.</p>
+            </li>
+            <li>
+              <strong>Food &amp; Beverage / Court Monitor — Flip Out</strong>
+              <span class="muted">December 2023 – May 2024</span>
+              <p class="small">Fast-paced environment with children and parents. Built strong communication skills and the ability to manage responsibilities under pressure.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card skills-card">
+          <h3>Skills</h3>
+          <div class="skill-chips">
+            <span>🐍 Python Programming</span>
+            <span>📊 Data Visualization</span>
+            <span>📉 Financial Modeling</span>
+            <span>🌐 English &amp; Urdu</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: PROJECTS (interactive) ==================== -->
+    <section class="panel" id="projects" role="tabpanel">
+      <h2 class="panel-title">📊 Interactive Credit Risk Analyzer</h2>
+      <div class="callout info">
+        Use the filters below to explore the relationship between borrowing costs and credit risk across S&amp;P 500 companies.
+      </div>
+
+      <div id="data-status" class="data-status">Loading S&amp;P 500 dataset…</div>
+
+      <div class="controls" id="controls" hidden>
+        <div class="control-block">
+          <label class="control-label">Filter by Sector</label>
+          <div class="sector-chips" id="sector-chips"></div>
+        </div>
+        <div class="control-block">
+          <label class="control-label" for="cap-slider">
+            Min Market Cap: <span id="cap-value">$0B</span>
+          </label>
+          <input type="range" id="cap-slider" min="0" max="200" step="10" value="0" />
+        </div>
+        <div class="obs-count">
+          <span id="obs-count">0</span>
+          <small>observations</small>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div id="chart-scatter" class="chart"></div>
+      </div>
+
+      <h3 class="sub-title">📦 Cost of Debt Distribution by Sector</h3>
+      <div class="chart-card">
+        <div id="chart-box" class="chart"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: INTERESTS ==================== -->
+    <section class="panel" id="interests" role="tabpanel">
+      <h2 class="panel-title">🌍 My Hobbies: Travel, Reading &amp; More</h2>
+
+      <div class="interests-grid">
+        <div class="card">
+          <h3>📚 Reading</h3>
+          <p>I'm an avid reader, enjoying everything from political ideologies to fiction. Favourites include <em>Men in the Sun</em> by Ghassan Kanafani and <em>A Thousand Splendid Suns</em> by Khaled Hosseini.</p>
+        </div>
+        <div class="card">
+          <h3>🎬 Films &amp; Series</h3>
+          <p>I love exploring different genres and storytelling styles from around the world — from <em>My Name</em>, a South Korean action series, to <em>Interstellar</em>, a film about space with incredible visuals.</p>
+        </div>
+        <div class="card">
+          <h3>🌸 Perfumes</h3>
+          <p>Collecting fragrances from different brands — and creating my own. I follow content creators such as Jeremy Fragrance to deepen my understanding and discover new scents.</p>
+        </div>
+        <div class="card">
+          <h3>✈️ Travel</h3>
+          <p>I've visited six countries across Europe, Africa and Asia. Each trip has let me meet different people, explore new cultures and gain a deeper understanding of the world.</p>
+        </div>
+      </div>
+
+      <h3 class="sub-title">🌍 My Travel Footprint</h3>
+      <div class="chart-card">
+        <div id="chart-travel" class="chart"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: MARKET INTELLIGENCE (NLP) ==================== -->
+    <section class="panel" id="intelligence" role="tabpanel">
+      <h2 class="panel-title">📰 Market Intelligence</h2>
+      <p class="lede">
+        <em>This tab demonstrates <strong>Week 10 NLP techniques</strong> — stop-word filtering, string normalisation, and keyword frequency analysis applied to financial news headlines.</em>
+      </p>
+
+      <h3 class="sub-title">📋 Headlines Analysed</h3>
+      <ul class="headlines" id="headlines-list"></ul>
+
+      <h3 class="sub-title">🔍 Most Frequent Keywords</h3>
+      <div class="chart-card">
+        <div id="chart-nlp" class="chart"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: AI ANALYST ==================== -->
+    <section class="panel" id="ai" role="tabpanel">
+      <h2 class="panel-title">🤖 AI Financial Analyst</h2>
+      <p class="lede">
+        <em>This tab originally used a <strong>Large Language Model (LLM)</strong> via the Groq API — demonstrating <strong>Week 8 &amp; 9</strong> prompt engineering and LLM integration. For the static portfolio version, a curated set of pre-answered financial questions is displayed below.</em>
+      </p>
+
+      <div class="callout note">
+        📌 <strong>Why static?</strong> GitHub Pages cannot safely run live API calls (the API key would be exposed in public source code). These answers were generated by the Groq <code>llama-3.3-70b-versatile</code> model used in the notebook and stored here.
+      </div>
+
+      <div class="faq" id="faq-list"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Taqwa Naseeb · Bayes Business School · Built with HTML, CSS &amp; Plotly.js</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
